@@ -8,10 +8,10 @@ import Home from "./src/screens/Home/Home";
 import MainNavigation from "./src/screens/navigation/MainNavigation";
 import { Colors } from "./src/constants/global";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./src/redux/reducers";
 // import { PersistGate } from "redux-persist/integration/react";
-// import thunk from "redux-thunk";
+import thunk from "redux-thunk";
 // import { persistStore } from "redux-persist";
 const theme = {
   ...DefaultTheme,
@@ -23,10 +23,8 @@ const theme = {
   },
 };
 
-// const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 // const persistor = persistStore(store);
-
-const store = createStore(rootReducer);
 const Stack = createNativeStackNavigator();
 
 export default function App() {

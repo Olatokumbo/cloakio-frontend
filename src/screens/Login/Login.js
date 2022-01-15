@@ -12,7 +12,6 @@ import BG from "../../assets/bg.png";
 import { Colors } from "../../constants/global";
 import { useSelector, useDispatch } from "react-redux";
 import { startSignin } from "../../redux/actions/auth";
-import * as actionTypes from "../../redux/actions/actionTypes";
 
 const Login = ({ navigation }) => {
   const state = useSelector((state) => state.auth);
@@ -23,13 +22,20 @@ const Login = ({ navigation }) => {
 
   const signin = async () => {
     try {
-      const data = await startSignin({ email, password });
-      dispatch({ type: actionTypes.SIGNIN_SUCCESS }, ...data);
+      await dispatch(startSignin({ email, password }));
+      // navigation.navigate("Home");
     } catch (error) {
-      dispatch({ type: actionTypes.SIGNIN_FAILED, error });
-      console.log(state)
       alert(error);
     }
+
+    // try {
+    //   const data = await
+    //   dispatch({ type: actionTypes.SIGNIN_SUCCESS }, ...data);
+    // } catch (error) {
+    //   dispatch({ type: actionTypes.SIGNIN_FAILED, error });
+    //   console.log(state);
+    //   alert(error);
+    // }
     // try {
     //   const data = await auth.signInWithEmailAndPassword(email, password);
     //   dispatch({ type: actionTypes.SIGNIN_SUCCESS, ...data });
