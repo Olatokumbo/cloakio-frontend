@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   View,
@@ -9,8 +10,21 @@ import {
 import { TextInput } from "react-native-paper";
 import BG from "../../assets/bg.png";
 import { Colors } from "../../constants/global";
+import { auth } from "../../config/firebase";
 
 const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signin = async () => {
+    try {
+      const data = await auth.signInWithEmailAndPassword(email, password);
+      console.log(data);
+      navigation.navigate("Home");
+    } catch (err) {
+      alert(err);
+    }
+  };
   return (
     <View style={styles.main}>
       <View style={styles.bg}>
@@ -26,11 +40,17 @@ const Login = ({ navigation }) => {
         <TextInput
           label="Email"
           mode="flat"
+          value={email}
+          onChangeText={(e) => setEmail(e)}
           style={styles.input}
           underlineColorAndroid="transparent"
         />
         <TextInput
           label="Password"
+          mode="flat"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={(e) => setPassword(e)}
           style={styles.input}
           underlineColorAndroid="transparent"
         />
@@ -40,10 +60,7 @@ const Login = ({ navigation }) => {
           start={{ x: 1.0, y: 5.0 }}
           style={styles.btnBg}
         >
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("Home")}
-          >
+          <TouchableOpacity style={styles.btn} onPress={signin}>
             <Text style={styles.textBtn}>Sign in</Text>
           </TouchableOpacity>
         </LinearGradient>
@@ -95,7 +112,7 @@ const styles = StyleSheet.create({
     padding: 0,
     flex: 1,
     height: 50,
-    justifyContent:"center"
+    justifyContent: "center",
   },
   btnBg: {
     marginTop: 30,
