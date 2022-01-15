@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   View,
@@ -10,20 +10,37 @@ import {
 import { TextInput } from "react-native-paper";
 import BG from "../../assets/bg.png";
 import { Colors } from "../../constants/global";
-import { auth } from "../../config/firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { startSignin } from "../../redux/actions/auth";
+import * as actionTypes from "../../redux/actions/actionTypes";
 
 const Login = ({ navigation }) => {
+  const state = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signin = async () => {
     try {
-      const data = await auth.signInWithEmailAndPassword(email, password);
-      console.log(data);
-      navigation.navigate("Home");
-    } catch (err) {
-      alert(err);
+      const data = await startSignin({ email, password });
+      dispatch({ type: actionTypes.SIGNIN_SUCCESS }, ...data);
+    } catch (error) {
+      dispatch({ type: actionTypes.SIGNIN_FAILED, error });
+      console.log(state)
+      alert(error);
     }
+    // try {
+    //   const data = await auth.signInWithEmailAndPassword(email, password);
+    //   dispatch({ type: actionTypes.SIGNIN_SUCCESS, ...data });
+    //   // navigation.navigate("Home");
+    //   console.log(state);
+    // } catch (err) {
+    //   alert(err);
+
+    //   dispatch({ type: actionTypes.SIGNIN_FAILED, err });
+    //   console.log(state);
+    // }
   };
   return (
     <View style={styles.main}>

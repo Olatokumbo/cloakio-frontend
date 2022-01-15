@@ -7,7 +7,12 @@ import { StatusBar } from "expo-status-bar";
 import Home from "./src/screens/Home/Home";
 import MainNavigation from "./src/screens/navigation/MainNavigation";
 import { Colors } from "./src/constants/global";
-
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./src/redux/reducers";
+// import { PersistGate } from "redux-persist/integration/react";
+// import thunk from "redux-thunk";
+// import { persistStore } from "redux-persist";
 const theme = {
   ...DefaultTheme,
   roundness: 2,
@@ -18,35 +23,48 @@ const theme = {
   },
 };
 
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+// const persistor = persistStore(store);
+
+const store = createStore(rootReducer);
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <StatusBar backgroundColor={Colors.primary} style="light" translucent={true} />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="GetStarted"
-            component={GetStarted}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Login"
-            component={Login}
-          />
-          <Stack.Screen
-            options={{
-              header: () => null,
-              navigationOptions: {
-                headerShown: false,
-              }}}
-            name="Home"
-            component={MainNavigation}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <Provider store={store}>
+      {/* <PersistGate persistor={persistor}> */}
+      <PaperProvider theme={theme}>
+        <StatusBar
+          backgroundColor={Colors.primary}
+          style="light"
+          translucent={true}
+        />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="GetStarted"
+              component={GetStarted}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+            <Stack.Screen
+              options={{
+                header: () => null,
+                navigationOptions: {
+                  headerShown: false,
+                },
+              }}
+              name="Home"
+              component={MainNavigation}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+      {/* </PersistGate> */}
+    </Provider>
   );
 }
