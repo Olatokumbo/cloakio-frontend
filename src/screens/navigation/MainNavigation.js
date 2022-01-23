@@ -1,17 +1,9 @@
 import { Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Home from "../Home/Home";
+import Home from "../Home";
 import { Colors } from "../../constants/global";
 import ServiceNavigation from "./ServiceNavigation";
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
 
 function SettingsScreen() {
   return (

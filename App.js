@@ -1,10 +1,10 @@
-import GetStarted from "./src/screens/GetStarted/GetStarted";
-import Login from "./src/screens/Login/Login";
+import GetStarted from "./src/screens/GetStarted";
+import Login from "./src/screens/Login";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import Home from "./src/screens/Home/Home";
+import Home from "./src/screens/Home";
 import MainNavigation from "./src/screens/navigation/MainNavigation";
 import { Colors } from "./src/constants/global";
 import { Provider } from "react-redux";

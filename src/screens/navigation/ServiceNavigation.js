@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../Home/Home";
-import ServiceInfo from "../ServiceInfo/ServiceInfo"
+import Home from "../Home";
+import ServiceInfo from "../ServiceInfo"
 import { Colors } from "../../constants/global";
 
 const Stack = createNativeStackNavigator();

@@ -1,11 +1,9 @@
 import {
-  StyleSheet,
   View,
   FlatList,
   Text,
   SafeAreaView,
   Image,
-  StatusBar,
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -13,8 +11,9 @@ import { Avatar } from "react-native-paper";
 import Logo from "../../assets/logo.png";
 import BG from "../../assets/bg.png";
 import SearcBar from "../../components/SearchBar";
-import { Categories, Colors } from "../../constants/global";
+import { Categories } from "../../constants/global";
 import PosterRow from "../../components/PosterRow";
+import styles from "./styles";
 
 const Home = ({ navigation }) => {
   return (
@@ -68,67 +67,4 @@ const Home = ({ navigation }) => {
 
 export default Home;
 
-const styles = StyleSheet.create({
-  home: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight,
-  },
-  header: {
-    justifyContent: "space-between",
-    backgroundColor: Colors.primary,
-    padding: 5,
-    height: "auto",
-  },
-  headerContent: {
-    margin: 10,
-  },
-  headerTop: {
-    marginBottom: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  logo: {
-    width: 50,
-    height: 50,
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 50,
-  },
-  categoryMenu: {
-    flexGrow: 0,
-    paddingVertical: 5,
-  },
-  categoryTitle: {
-    color: "white",
-    fontSize: 15,
-    fontWeight: "500",
-    marginHorizontal: 10,
-  },
-  explore: {
-    height: 170,
-    justifyContent: "center",
-  },
-  exploreText: {
-    fontSize: 55,
-    fontWeight: "bold",
-    color: "white",
-    position: "absolute",
-    zIndex: 3,
-    marginLeft: "5%",
-  },
-  exploreImage: {
-    height: "100%",
-    width: "100%",
-    zIndex: 1,
-  },
-  overlay: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "rgba(55, 65, 81, 0.54)",
-    position: "absolute",
-    zIndex: 2,
-  },
-});
+
