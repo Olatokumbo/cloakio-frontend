@@ -6,6 +6,7 @@ export const authInitialState = {
   email: null,
   photoURL: null,
   error: null,
+  refreshToken: null,
 };
 
 const authReducer = (state = authInitialState, action) => {
@@ -17,12 +18,22 @@ const authReducer = (state = authInitialState, action) => {
         displayName: action.displayName,
         email: action.email,
         photoURL: action.photoURL,
+        refreshToken: action.refreshToken,
         error: null,
       };
     case actionTypes.SIGNIN_FAILED:
       return {
         ...state,
         error: action.error,
+      };
+    case actionTypes.SIGNOUT_SUCCESS:
+      return {
+        uid: null,
+        displayName: null,
+        email: null,
+        photoURL: null,
+        error: null,
+        refreshToken: null,
       };
 
     default:

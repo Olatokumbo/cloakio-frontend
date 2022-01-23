@@ -12,6 +12,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Colors } from "../../constants/global";
 import PosterRow from "../../components/PosterRow";
 import ReviewCard from "../../components/ReviewCard";
+import styles from "./styles";
 
 const ServiceInfo = () => {
   const windowWidth = Dimensions.get("window").width;
@@ -81,4 +82,3 @@ const ServiceInfo = () => {
 };
 
 export default ServiceInfo;
-
