@@ -1,46 +1,20 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as actionTypes from "../../redux/actions/actionTypes";
-import { auth } from "../../config/firebase";
+import { useSelector } from "react-redux";
 
 import GetStarted from "../GetStarted";
 import Login from "../Login";
 import MainNavigation from "./MainNavigation";
+import useAuth from "../../hooks/auth";
 
 const Stack = createNativeStackNavigator();
 const RootNavigation = () => {
-  const [loading, setLoading] = useState(false);
   const userAuth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      console.log(">>>>>>", user, "<<<<<<<");
-      setLoading(true);
-      if (user) {
-        console.log("Signed in");
-        setLoading(false);
-        dispatch({
-          type: actionTypes.SIGNIN_SUCCESS,
-          uid: user.uid,
-          photoURL: user.photoURL,
-          displayName: user.displayName,
-          email: user.email,
-          refreshToken: user.refreshToken,
-        });
-      } else {
-        console.log("Not Signed in");
-        setLoading(false);
-        dispatch({ type: actionTypes.SIGNOUT_SUCCESS });
-      }
-    });
-  }, []);
+  const loading = useAuth();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {(userAuth.email && !loading) ? (
+        {userAuth.email && !loading ? (
           <Stack.Screen
             options={{
               header: () => null,
